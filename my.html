@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Countdown</title>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            text-align: center;
+            padding: 50px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        #age {
+            font-size: 1.5em;
+            margin-top: 20px;
+            padding: 20px;
+            border: 2px solid #333;
+            display: inline-block;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .quote {
+            margin-top: 30px;
+            font-size: 2em;
+            color: darkred;
+            font-family: 'Creepster', cursive;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            #age {
+                font-size: 1.2em;
+                padding: 15px;
+            }
+
+            .quote {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Live Age Counter</h1>
+    <div id="age"></div>
+    <div class="quote">Your time is limited, so don’t waste it living someone else’s life</div>
+
+    <script>
+        // Your birthdate and time (15 April 2003, 8 AM IST)
+        const birthDate = new Date('2003-04-15T02:30:00Z'); // 8 AM IST is 2:30 AM UTC
+
+        function updateAge() {
+            const now = new Date();
+            const diff = now - birthDate;
+
+            // Calculate time components
+            const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
+            const months = Math.floor((diff % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60 * 24 * 30.44));
+            const days = Math.floor((diff % (1000 * 60 * 60 * 24 * 30.44)) / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            // Update the age div
+            document.getElementById('age').innerHTML = 
+                `${years} years, ${months} months, ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+        }
+
+        // Update age every second
+        setInterval(updateAge, 1000);
+        updateAge();
+    </script>
+</body>
+</html>
